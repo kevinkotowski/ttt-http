@@ -1,0 +1,35 @@
+<html>
+    <header><h1><a href="/">Tic Tac Toe</a> - Board</h1></header>
+    <body>
+
+        <table>
+            <tr>
+                <td><br/>&nbsp;{{square:0}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:1}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:2}}&nbsp;<br/></td>
+            </tr>
+            <tr>
+                <td><br/>&nbsp;{{square:3}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:4}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:5}}&nbsp;<br/></td>
+            </tr>
+            <tr>
+                <td><br/>&nbsp;{{square:6}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:7}}&nbsp;<br/></td>
+                <td><br/>&nbsp;{{square:8}}&nbsp;<br/></td>
+            </tr>
+        </table>
+
+        <br/>
+        <p>
+            Player: {{player_to_move}}<br/>
+            Recommendation: {{reco}}<br/>
+            <br/>
+            Enter value 1-9, or 'q' to quit.
+        </p>
+        <form action="move" method="post">
+            <input type="text" name="move" value="" autofocus>
+            <input type="submit" value="Move"</input>
+        </form>
+    </body>
+</html>
