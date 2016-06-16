@@ -25,7 +25,6 @@ public class __WebTransformTAGSTest {
         response.setBody(this.content);
         response = xformTAGS.transformResponse(response);
 
-        System.out.println("...test: \n" + response.getBody());
         assertTrue(response.getBody().contains("Joshua"));
         assertTrue(response.getBody().contains("lazy X"));
         assertTrue(response.getBody().contains("info text"));

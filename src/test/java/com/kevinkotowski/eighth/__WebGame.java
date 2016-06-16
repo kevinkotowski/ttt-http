@@ -18,12 +18,6 @@ public class __WebGame {
         game.start();
 
         assertTrue(game.isActive());
-//        WebGameBoard board = new WebGameBoard(game);
-//        assertEquals( "PLAYER1", board.getTurn() );
-//        assertEquals( "Homer", board.getTurnPlayerName() );
-//        assertEquals( "4", board.getMoveReco() );
-//        assertEquals( "0,0,0,0,0,0,0,0,0", board.getMoveReco() );
-//        assertTrue( board.isAvailable("0") );
     }
 
     @Test
@@ -79,11 +73,8 @@ public class __WebGame {
         game.move("2");
         game.move("9");
 
-        System.out.println(gameApi.getStatus());
         assertFalse( game.isActive() );
         assertTrue( game.isEndgame() );
-
-        System.out.println(game.getBoard() );
     }
 
     @Test
@@ -96,7 +87,6 @@ public class __WebGame {
         assertFalse( game.isEndgame() );
 
         game.quit();
-        System.out.println(gameApi.getStatus());
         assertFalse( game.isActive() );
         assertFalse( game.isEndgame() );
     }

@@ -59,11 +59,10 @@ public class _TttApiTest {
         tttApi.postMove("2");
 
         String status = tttApi.getStatus();
-        assertTrue( status.contains("active=true") );
+        assertTrue( status.contains("active=false") );
         assertTrue( status.contains("winner=PLAYER1") );
 
         String content = tttApi.getEndgame();
-        System.out.println("...apiTest.getEndgame:\n" + content);
         assertTrue( content.contains("board=1,1,1,0,2,0,2,0,0") );
         assertTrue( status.contains("winner=PLAYER1") );
     }

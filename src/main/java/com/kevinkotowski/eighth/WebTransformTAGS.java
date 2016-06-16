@@ -26,7 +26,6 @@ public class WebTransformTAGS implements IHTransformer {
             List<String> tags = WebReplaceTags.get(body);
 
             for (String tag : tags) {
-                System.out.println("...xformTAGS: " + tag);
                 body = this.replaceTag(body, tag);
                 response.setBody( body );
             }

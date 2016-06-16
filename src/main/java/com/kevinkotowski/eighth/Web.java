@@ -27,16 +27,20 @@ public class Web implements IHHttp {
         IHMiddleware middleware = new HttpMiddleware();
         middleware.registerTransformer(new HttpTransformREDIRECT (
                 "/", "/index.html"));
+        middleware.registerTransformer(new WebTransformENDGAME( game ) );
         middleware.registerTransformer(new WebTransformTAGS( game ) );
 
 
         IHRouter router = new HttpRouter(docRoot, accessLogger);
         router.registerRoute(new HttpRoute (
                 "/menu",
-                HttpMethod.POST, new WebControllerGAME( game ) ));
+                HttpMethod.POST, new WebControllerMENU( game ) ));
         router.registerRoute(new HttpRoute (
                 "/move",
-                HttpMethod.POST, new WebControllerGAME( game ) ));
+                HttpMethod.POST, new WebControllerMOVE( game ) ));
+        router.registerRoute(new HttpRoute (
+                "/quit",
+                HttpMethod.POST, new WebControllerQUIT( game ) ));
 
         IHServer httpServer = new HttpServer( network,
                 middleware,

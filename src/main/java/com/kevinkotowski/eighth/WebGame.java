@@ -18,7 +18,6 @@ public class WebGame {
 
     public void move(String move) {
         int position = Integer.parseInt(move) - 1;
-        System.out.println("...game.move position: " + position);
         this.gameApi.postMove(Integer.toString(position));
     }
 
@@ -38,8 +37,13 @@ public class WebGame {
     }
 
     public boolean isEndgame() {
-        String winner = WebScanByLine.get( this.gameApi.getStatus(), "winner");
-        return !winner.equals("NONE");
+        boolean endgame = false;
+        if (!this.isActive()) {
+            String winner = WebScanByLine.get(
+                    this.gameApi.getStatus(), "winner");
+            endgame = !winner.equals("NONE");
+        }
+        return endgame;
     }
 
     public String[] getBoard() {
