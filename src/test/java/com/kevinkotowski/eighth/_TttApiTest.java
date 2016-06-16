@@ -69,4 +69,17 @@ public class _TttApiTest {
         assertTrue( content.contains("board=1,1,1,0,2,0,2,0,0") );
         assertTrue( status.contains("winner=PLAYER1") );
     }
+
+    @Test
+    public void quitGame() throws Exception {
+        TttApi tttApi = new TttApi();
+        tttApi.postStart();
+
+        String status = tttApi.getStatus();
+        assertTrue( status.contains("active=true") );
+
+        tttApi.postExit();
+        status = tttApi.getStatus();
+        assertTrue( status.contains("active=false") );
+    }
 }
