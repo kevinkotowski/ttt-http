@@ -18,6 +18,7 @@ public class WebGame {
 
     public void move(String move) {
         int position = Integer.parseInt(move) - 1;
+        System.out.println("...game.move position: " + position);
         this.gameApi.postMove(Integer.toString(position));
     }
 
@@ -31,14 +32,14 @@ public class WebGame {
     }
 
     public boolean isAvailable(String square) {
-        Integer position = Integer.parseInt(square);
+        Integer position = Integer.parseInt(square) - 1;
         String[] board = this.getBoard();
         return (board[position].equals("0"));
     }
 
     public boolean isEndgame() {
-        String endgame = WebScanByLine.get( this.gameApi.getStatus(), "endgame");
-        return Boolean.parseBoolean(endgame);
+        String winner = WebScanByLine.get( this.gameApi.getStatus(), "winner");
+        return !winner.equals("NONE");
     }
 
     public String[] getBoard() {
@@ -48,7 +49,7 @@ public class WebGame {
     }
 
     public String getSquare(String square) {
-        Integer position = Integer.parseInt(square);
+        Integer position = Integer.parseInt(square) - 1;
         String value = Integer.toString(position + 1);
         String[] board = this.getBoard();
         if (board[position].equals("1")) value = "X";
@@ -56,10 +57,21 @@ public class WebGame {
         return value;
     }
 
+    public String getMoveReco() {
+        String name = WebScanByLine.get(
+                this.gameApi.getBoard(), "move_reco");
+        return name;
+    }
+
     public String getTurnPlayerName() {
         String name = WebScanByLine.get(
                 this.gameApi.getBoard(), "turn_player_name");
         return name;
+    }
 
+    public String getWinnerName() {
+        String name = WebScanByLine.get(
+                this.gameApi.getEndgame(), "winner_player_name");
+        return name;
     }
 }

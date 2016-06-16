@@ -15,7 +15,6 @@ public class _TttApiTest {
         String status = tttApi.getStatus();
         assertTrue( status.contains("active=false") );
         assertTrue( status.contains("winner=NONE") );
-        assertTrue( status.contains("page=menu") );
     }
 
     @Test
@@ -26,7 +25,6 @@ public class _TttApiTest {
         String status = tttApi.getStatus();
         assertTrue( status.contains("active=true") );
         assertTrue( status.contains("winner=NONE") );
-        assertTrue( status.contains("page=board") );
     }
 
     @Test
@@ -37,7 +35,7 @@ public class _TttApiTest {
         String content = tttApi.getBoard();
         assertTrue( content.contains("turn=PLAYER1") );
         assertTrue( content.contains("turn_player_name=Homer") );
-        assertTrue( content.contains("move_reco=X") );
+        assertTrue( content.contains("move_reco=") );
         assertTrue( content.contains("board=0,0,0,0,0,0,0,0,0") );
     }
 
@@ -63,9 +61,9 @@ public class _TttApiTest {
         String status = tttApi.getStatus();
         assertTrue( status.contains("active=true") );
         assertTrue( status.contains("winner=PLAYER1") );
-        assertTrue( status.contains("page=endgame") );
 
         String content = tttApi.getEndgame();
+        System.out.println("...apiTest.getEndgame:\n" + content);
         assertTrue( content.contains("board=1,1,1,0,2,0,2,0,0") );
         assertTrue( status.contains("winner=PLAYER1") );
     }

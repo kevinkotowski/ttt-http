@@ -21,16 +21,15 @@ public class WebTransformTAGS implements IHTransformer {
     }
 
     public IHResponse transformResponse(IHResponse response) {
-        if (game.isActive()) {
+        if (game.isActive() || game.isEndgame()) {
             String body = response.getBody();
-            List<String> tags = WebScanTags.get(body);
+            List<String> tags = WebReplaceTags.get(body);
 
             for (String tag : tags) {
                 System.out.println("...xformTAGS: " + tag);
                 body = this.replaceTag(body, tag);
                 response.setBody( body );
             }
-            System.out.println("...xformResponse: \n" + response.getBody());
         }
         return response;
     }
@@ -55,10 +54,17 @@ public class WebTransformTAGS implements IHTransformer {
             case "message":
                 replacement = "info text";
                 break;
+            case "reco":
+                replacement = this.game.getMoveReco();
+                break;
+            case "winner_player_name":
+                replacement = this.game.getWinnerName();
+                break;
             default:
                 replacement = tag;
                 break;
         }
+        if (replacement == null) replacement = "";
         body = body.replaceAll("\\{\\{" + tag + "\\}\\}", replacement);
         return body;
     }

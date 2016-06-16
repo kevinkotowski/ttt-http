@@ -5,50 +5,50 @@
         <table>
             <tr>
                 <td><h3><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{square::0}}&nbsp;&nbsp;&nbsp;&nbsp;
-                <br/></h3></td>
-                <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::1}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::2}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
-            </tr>
-            <tr>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::3}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
+            </tr>
+            <tr>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::4}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::5}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
-            </tr>
-            <tr>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::6}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
+            </tr>
+            <tr>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::7}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
                 <td><h3><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{square::8}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/></h3></td>
+                <td><h3><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{square::9}}&nbsp;&nbsp;&nbsp;&nbsp;
+                <br/></h3></td>
             </tr>
         </table>
 
         <p>
             Player: {{turn_player_name}}<br/>
-            Recommendation: {{reco}}<br/>
             <br/>
-            Message: {{message}}
+            Winner: {{winner_player_name}}<br/>
             <br/>
             Enter value 1-9, or 'q' to quit.
         </p>
 
         <form action="move" method="post">
-            <input type="text" name="move" value="" autofocus>
+            <input type="text" name="move" value="{{reco}}"
+                   maxlength="1" autofocus>
             <input type="submit" value="Move"</input>
         </form>
     </body>

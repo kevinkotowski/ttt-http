@@ -8,7 +8,7 @@ import java.util.regex.MatchResult;
 /**
  * Created by kevinkotowski on 6/15/16.
  */
-public class WebScanTags {
+public class WebReplaceTags {
     public static List<String> get(String content) {
         List<String> tokens = new ArrayList<String>();
         if (content != null) {

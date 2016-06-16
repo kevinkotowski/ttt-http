@@ -46,7 +46,6 @@ public class WebControllerGAME implements IHController {
     }
 
     private void parseOperation(String content) {
-        System.out.println("...controllerGAME parseOperation: " + content);
         if (content != null) {
             Scanner scanner = new Scanner(content);
             while (scanner.hasNextLine()) {
@@ -78,10 +77,8 @@ public class WebControllerGAME implements IHController {
 
     private IHResponse controlMOVE(IHResponse response) {
         if (this.game.isActive()) {
-
             if ( this.game.isAvailable(this.value) ) {
                 this.game.move(this.value);
-                System.out.println(this.game.getBoard());
                 response.addHeader("Location: /board.html?last=" +
                         this.value);
             } else {

@@ -26,13 +26,13 @@ public class __WebTransformTAGSTest {
         response = xformTAGS.transformResponse(response);
 
         System.out.println("...test: \n" + response.getBody());
-        assertTrue(response.getBody().contains("Homer"));
+        assertTrue(response.getBody().contains("Joshua"));
         assertTrue(response.getBody().contains("lazy X"));
         assertTrue(response.getBody().contains("info text"));
     }
 
     String content =
             "The quick brown {{turn_player_name}} jumps over\n" +
-                    "the lazy {{square::3}}. However, there was a\n" +
-                    "strange {{message}} to read.";
+            "the lazy {{square::3}}. However, there was a\n" +
+            "strange {{message}} to read.";
 }

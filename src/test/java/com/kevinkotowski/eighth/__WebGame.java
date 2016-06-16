@@ -62,9 +62,28 @@ public class __WebGame {
         WebGame game = new WebGame(gameApi);
         game.start();
 
-        assertTrue(game.isAvailable("0"));
-        game.move("0");
-        assertFalse(game.isAvailable("0"));
+        assertTrue(game.isAvailable("9"));
+        game.move("9");
+        assertFalse(game.isAvailable("9"));
+    }
+
+    @Test
+    public void playToEndgame() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("1");
+        game.move("7");
+        game.move("5");
+        game.move("2");
+        game.move("9");
+
+        System.out.println(gameApi.getStatus());
+        assertFalse( game.isActive() );
+        assertTrue( game.isEndgame() );
+
+        System.out.println(game.getBoard() );
     }
 
     @Test
@@ -77,6 +96,7 @@ public class __WebGame {
         assertFalse( game.isEndgame() );
 
         game.quit();
+        System.out.println(gameApi.getStatus());
         assertFalse( game.isActive() );
         assertFalse( game.isEndgame() );
     }
