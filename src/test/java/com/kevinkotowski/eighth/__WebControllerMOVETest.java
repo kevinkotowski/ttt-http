@@ -69,7 +69,7 @@ public class __WebControllerMOVETest {
     }
 
     @Test
-    public void beginGameMoveINValid() throws Exception {
+    public void beginGameMoveINValidX() throws Exception {
         TttApi gameApi = new TttApi();
         WebGame game = new WebGame(gameApi);
 
@@ -83,6 +83,23 @@ public class __WebControllerMOVETest {
 
         assertEquals("Homer", game.getTurnPlayerName());
         assertTrue(TestInHeaders.check(response.getHeaders(), "bad=X") );
+    }
+
+    @Test
+    public void beginGameMoveINValidBlank() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        IHController controller = new WebControllerMOVE(game);
+
+        HttpRequest request = new HttpRequest(new MockSocket());
+        request.setContent("move=");
+
+        IHResponse response = controller.execute(request);
+
+        assertEquals("Homer", game.getTurnPlayerName());
+        assertTrue(TestInHeaders.check(response.getHeaders(), "bad=") );
     }
 
     @Test

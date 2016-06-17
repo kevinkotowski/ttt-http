@@ -21,7 +21,10 @@ public class WebControllerMOVE implements IHController {
 
         String[] tokens = WebParseOperation.parse(request.getContent());
         String method = tokens[0];
-        String value = tokens[1];
+        String value = "";
+        if (tokens.length > 1)  {
+            value = tokens[1];
+        }
 
         // set default so it only needs to be done once
         response.setResponseCode("302");
