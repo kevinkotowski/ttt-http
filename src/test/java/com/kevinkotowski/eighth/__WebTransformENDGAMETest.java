@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by kevinkotowski on 6/16/16.
  */
-public class __WebTransformENDGAME {
+public class __WebTransformENDGAMETest {
     @Test
     public void redirectEndGame() throws Exception {
         TttApi gameApi = new TttApi();
