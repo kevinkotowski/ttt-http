@@ -43,7 +43,28 @@ public class __WebControllerMOVETest {
         IHResponse response = controller.execute(request);
 
         assertEquals("X", game.getSquare("4"));
-        assertEquals("Joshua", game.getTurnPlayerName());
+        assertTrue(TestInHeaders.check(response.getHeaders(), "board") );
+    }
+
+
+    @Test
+    public void verifyAutoComputerMove() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        IHController controller = new WebControllerMOVE(game);
+
+        HttpRequest request = new HttpRequest(new MockSocket());
+        request.setContent("move=1");
+
+        IHResponse response = controller.execute(request);
+
+        assertEquals( "X", game.getSquare("1") );
+        assertEquals( "O", game.getSquare("5") );
+
+        // If computer doesn't go automatically, Joshua would be player
+        assertEquals( "Homer", game.getTurnPlayerName() );
         assertTrue(TestInHeaders.check(response.getHeaders(), "board") );
     }
 

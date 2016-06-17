@@ -62,6 +62,22 @@ public class __WebGame {
     }
 
     @Test
+    public void getWinnerName() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("1");
+        game.move("7");
+        game.move("5");
+        game.move("2");
+        game.move("9");
+
+        String winner = game.getWinnerName();
+        assertEquals( "Homer", winner );
+    }
+
+    @Test
     public void playToEndgame() throws Exception {
         TttApi gameApi = new TttApi();
         WebGame game = new WebGame(gameApi);
@@ -78,7 +94,7 @@ public class __WebGame {
     }
 
     @Test
-    public void quitGameIsEndgame() throws Exception {
+    public void quitGameIsNotEndgame() throws Exception {
         TttApi gameApi = new TttApi();
         WebGame game = new WebGame(gameApi);
 
@@ -89,6 +105,32 @@ public class __WebGame {
         game.quit();
         assertFalse( game.isActive() );
         assertFalse( game.isEndgame() );
+    }
+
+    @Test
+    public void getReco() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("1");
+
+        String reco = game.getMoveReco();
+
+        assertEquals( "5", reco );
+    }
+
+    @Test
+    public void getNextTurnPlayerName() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("1");
+
+        String player = game.getTurnPlayerName();
+
+        assertEquals( "Joshua", player );
     }
 
     @Test

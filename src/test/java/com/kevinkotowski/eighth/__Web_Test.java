@@ -19,5 +19,4 @@ public class __Web_Test {
         Web web = new Web(server);
         assertTrue(server.status().contains("listening"));
     }
-
 }

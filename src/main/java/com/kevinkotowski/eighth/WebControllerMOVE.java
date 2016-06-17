@@ -31,20 +31,24 @@ public class WebControllerMOVE implements IHController {
                 this.game.quit();
                 response.addHeader("Location: /menu.html");
             } else {
-                response = this.controlMOVE(response, value);
+                response = this.move(response, value);
             }
         }
         return response;
     }
 
-    private IHResponse controlMOVE(IHResponse response, String value) {
-        if (this.game.isActive()) {
-            if (value.matches("[1-9]") && this.game.isSquareAvailable(value) ) {
-                this.game.move(value);
-                response.addHeader("Location: /board.html?last=" + value);
-            } else {
-                response.addHeader("Location: /board.html?bad=" + value);
+    private IHResponse move(IHResponse response, String value) {
+        if ( this.game.isActive() &&
+                value.matches("[1-9]") &&
+                this.game.isSquareAvailable(value) ) {
+            this.game.move(value);
+            String reco = this.game.getMoveReco();
+            if (reco != null && reco.matches("[1-9]")) {
+                this.game.move(reco);
             }
+            response.addHeader("Location: /board.html?last=" + value);
+        } else {
+            response.addHeader("Location: /board.html?bad=" + value);
         }
         return response;
     }

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class __WebControllerQUITTest {
     @Test
-    public void quitGameViaEndgame() throws Exception {
+    public void quitGameAfterEndgame() throws Exception {
         TttApi gameApi = new TttApi();
         WebGame game = new WebGame(gameApi);
 

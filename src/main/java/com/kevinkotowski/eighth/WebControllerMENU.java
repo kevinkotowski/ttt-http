@@ -27,12 +27,12 @@ public class WebControllerMENU implements IHController {
         response.setResponseCode("302");
 
         if (method.equals("menu")) {
-            response = this.controlMENU(response, value);
+            response = this.menu(response, value);
         }
         return response;
     }
 
-    private IHResponse controlMENU(IHResponse response, String value) {
+    private IHResponse menu(IHResponse response, String value) {
         if (value.equals("p")) {
             this.game.start();
             response.addHeader("Location: /board.html");
