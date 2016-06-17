@@ -27,6 +27,7 @@ public class Web implements IHHttp {
         IHMiddleware middleware = new HttpMiddleware();
         middleware.registerTransformer(new HttpTransformREDIRECT (
                 "/", "/index.html"));
+        middleware.registerTransformer(new WebTransformINACTIVE( game ) );
         middleware.registerTransformer(new WebTransformENDGAME( game ) );
         middleware.registerTransformer(new WebTransformTAGS( game ) );
 
