@@ -25,12 +25,16 @@ public class WebGame {
         this.gameApi.postExit();
     }
 
+    public void restart() {
+        this.gameApi.postStart();
+    }
+
     public boolean isActive() {
         String active = WebScanByLine.get( this.gameApi.getStatus(), "active");
         return Boolean.parseBoolean(active);
     }
 
-    public boolean isAvailable(String square) {
+    public boolean isSquareAvailable(String square) {
         Integer position = Integer.parseInt(square) - 1;
         String[] board = this.getBoard();
         return (board[position].equals("0"));

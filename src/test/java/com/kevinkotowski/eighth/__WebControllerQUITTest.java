@@ -6,7 +6,7 @@ import com.kevinkotowski.server.IHController;
 import com.kevinkotowski.server.IHResponse;
 import com.kevinkotowski.server.MockSocket;
 import org.junit.Test;
-import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -28,11 +28,19 @@ public class __WebControllerQUITTest {
 
         HttpRequest request = new HttpRequest(new MockSocket());
         request.setContent("quit=true");
-        String correctHeader = "Location: /";
+        String correctHeader = "Location: /board.html";
 
         IHResponse response = controller.execute(request);
 
-        assertFalse( game.isActive() );
+        // game restarts after a quit
+        assertTrue( game.isActive() );
+        String[] board = game.getBoard();
+        int count = 0;
+        for (String square : board) {
+            count++;
+            assertTrue(square.equals("0"));
+        }
+        assertEquals( 9,count );
         assertTrue(TestInHeaders.check(response.getHeaders(), correctHeader) );
     }
 }

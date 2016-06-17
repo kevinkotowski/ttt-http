@@ -11,8 +11,6 @@ import java.io.IOException;
  */
 public class WebControllerQUIT implements IHController {
     private WebGame game;
-    private String method;
-    private String value;
 
     WebControllerQUIT(WebGame game) {
         this.game = game;
@@ -22,15 +20,15 @@ public class WebControllerQUIT implements IHController {
         IHResponse response = new HttpResponse(request.getSocket());
 
         String[] tokens = WebParseOperation.parse(request.getContent());
-        this.method = tokens[0];
-        this.value = tokens[1];
+        String method = tokens[0];
+        String value = tokens[1];
 
         // set default so it only needs to be done once
         response.setResponseCode("302");
 
-        if (this.method.equals("quit")) {
-            this.game.quit();
-            response.addHeader("Location: /index.html");
+        if (method.equals("quit")) {
+            this.game.restart();
+            response.addHeader("Location: /board.html");
         }
         return response;
     }

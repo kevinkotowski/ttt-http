@@ -11,8 +11,6 @@ import java.io.IOException;
  */
 public class WebControllerMOVE implements IHController {
     private WebGame game;
-    private String method;
-    private String value;
 
     WebControllerMOVE(WebGame game) {
         this.game = game;
@@ -22,28 +20,30 @@ public class WebControllerMOVE implements IHController {
         IHResponse response = new HttpResponse(request.getSocket());
 
         String[] tokens = WebParseOperation.parse(request.getContent());
-        this.method = tokens[0];
-        this.value = tokens[1];
+        String method = tokens[0];
+        String value = tokens[1];
 
         // set default so it only needs to be done once
         response.setResponseCode("302");
 
-        if (this.method.equals("move")) {
-            response = this.controlMOVE(response);
+        if (method.equals("move")) {
+            if (value.equals("q")) {
+                this.game.quit();
+                response.addHeader("Location: /menu.html");
+            } else {
+                response = this.controlMOVE(response, value);
+            }
         }
         return response;
     }
 
-    private IHResponse controlMOVE(IHResponse response) {
+    private IHResponse controlMOVE(IHResponse response, String value) {
         if (this.game.isActive()) {
-            if ( this.game.isAvailable(this.value) ) {
-                this.game.move(this.value);
-                response.addHeader("Location: /board.html?last=" +
-                        this.value);
+            if (value.matches("[1-9]") && this.game.isSquareAvailable(value) ) {
+                this.game.move(value);
+                response.addHeader("Location: /board.html?last=" + value);
             } else {
-                // TODO: add setMessage interface to game?
-                response.addHeader("Location: /board.html?bad=" +
-                        this.value);
+                response.addHeader("Location: /board.html?bad=" + value);
             }
         }
         return response;

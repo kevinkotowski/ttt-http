@@ -11,8 +11,6 @@ import java.io.IOException;
  */
 public class WebControllerMENU implements IHController {
     private WebGame game;
-    private String method;
-    private String value;
 
     WebControllerMENU(WebGame game) {
         this.game = game;
@@ -22,20 +20,20 @@ public class WebControllerMENU implements IHController {
         IHResponse response = new HttpResponse(request.getSocket());
 
         String[] tokens = WebParseOperation.parse(request.getContent());
-        this.method = tokens[0];
-        this.value = tokens[1];
+        String method = tokens[0];
+        String value = tokens[1];
 
         // set default so it only needs to be done once
         response.setResponseCode("302");
 
-        if (this.method.equals("menu")) {
-            response = this.controlMENU(response);
+        if (method.equals("menu")) {
+            response = this.controlMENU(response, value);
         }
         return response;
     }
 
-    private IHResponse controlMENU(IHResponse response) {
-        if (this.value.equals("p")) {
+    private IHResponse controlMENU(IHResponse response, String value) {
+        if (value.equals("p")) {
             this.game.start();
             response.addHeader("Location: /board.html");
         } else { // all other values will "quit"

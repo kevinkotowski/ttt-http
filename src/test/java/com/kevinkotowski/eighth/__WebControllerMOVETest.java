@@ -47,4 +47,39 @@ public class __WebControllerMOVETest {
         assertTrue(TestInHeaders.check(response.getHeaders(), "board") );
     }
 
+    @Test
+    public void beginGameMoveINValid() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        IHController controller = new WebControllerMOVE(game);
+
+        HttpRequest request = new HttpRequest(new MockSocket());
+        request.setContent("move=X");
+
+        IHResponse response = controller.execute(request);
+
+        assertEquals("Homer", game.getTurnPlayerName());
+        assertTrue(TestInHeaders.check(response.getHeaders(), "bad=X") );
+    }
+
+    @Test
+    public void beginGameMoveQuit() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("5");
+        IHController controller = new WebControllerMOVE(game);
+
+        HttpRequest request = new HttpRequest(new MockSocket());
+        request.setContent("move=q");
+
+        IHResponse response = controller.execute(request);
+
+        assertFalse( game.isActive() );
+        String correctHeader = "Location: /menu.html";
+        assertTrue(TestInHeaders.check(response.getHeaders(), correctHeader) );
+    }
 }

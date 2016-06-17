@@ -6,7 +6,6 @@ import com.kevinkotowski.server.IHController;
 import com.kevinkotowski.server.IHResponse;
 import com.kevinkotowski.server.MockSocket;
 import org.junit.Test;
-
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,12 +22,12 @@ public class __WebControllerMENUTest {
 
         HttpRequest request = new HttpRequest(new MockSocket());
         request.setContent("menu=p");
-        String correctHeader = "Location: /board.html";
 
         IHResponse response = controller.execute(request);
 
         assertTrue( game.isActive() );
         assertEquals( "302", response.getResponseCode() );
+        String correctHeader = "Location: /board.html";
         assertTrue(TestInHeaders.check(response.getHeaders(), correctHeader) );
     }
 

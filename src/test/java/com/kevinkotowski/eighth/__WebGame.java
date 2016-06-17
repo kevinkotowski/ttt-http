@@ -56,9 +56,9 @@ public class __WebGame {
         WebGame game = new WebGame(gameApi);
         game.start();
 
-        assertTrue(game.isAvailable("9"));
+        assertTrue(game.isSquareAvailable("9"));
         game.move("9");
-        assertFalse(game.isAvailable("9"));
+        assertFalse(game.isSquareAvailable("9"));
     }
 
     @Test
@@ -88,6 +88,21 @@ public class __WebGame {
 
         game.quit();
         assertFalse( game.isActive() );
+        assertFalse( game.isEndgame() );
+    }
+
+    @Test
+    public void restartGame() throws Exception {
+        TttApi gameApi = new TttApi();
+        WebGame game = new WebGame(gameApi);
+
+        game.start();
+        game.move("1");
+
+        game.restart();
+        // this would throw a Position is not available if not for the restart
+        game.move("1");
+        assertTrue( game.isActive() );
         assertFalse( game.isEndgame() );
     }
 }
